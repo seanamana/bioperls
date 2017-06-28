@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.idtdna.com/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services.idtdna.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.idtdna.com/">
+      <s:element name="Analyze">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Sequence" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TargetType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OligoConc" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="NaConc" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="MgConc" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="dNTPsConc" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AnalyzeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AnalyzeResult" type="tns:AnalyzerResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AnalyzerResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Sequence" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Complement" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TargetType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SequenceLength" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="GCPctg" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinMeltTemp" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="MeltTemp" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxMeltTemp" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="MolecularWeight" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExtCoeff" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="nMolePerOD" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="uGramsPerOD" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasMixedElements" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasErrors" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfAnalyzerError" />
+          <s:element minOccurs="0" maxOccurs="1" name="Modifications" type="tns:ArrayOfModification" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAnalyzerError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AnalyzerError" nillable="true" type="tns:AnalyzerError" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AnalyzerError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorSymbol" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorSeverity" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfModification">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Modification" nillable="true" type="tns:Modification" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Modification">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShortName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HeteroDimer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Sequence" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SecondarySequence" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HeteroDimerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HeteroDimerResult" type="tns:TDuplexResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TDuplexResults">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PrimarySeq" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondarySeq" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ComplementarityPercent" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="DimerInfo" type="tns:ArrayOfTDuplexMatch" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsComplementPair" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LongestCCP" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MolWgtHy" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="OffsetOfLongestCCP" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShortOligoLength" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrimarySeqHasErrors" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SecondarySeqHasErrors" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxDeltaG" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTDuplexMatch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TDuplexMatch" nillable="true" type="tns:TDuplexMatch" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TDuplexMatch">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DeltaG" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="Start_Pos" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Base_Pairs" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Bonds" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="TopLinePadding" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BondLinePadding" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BottomLinePadding" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SelfDimer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Sequence" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelfDimerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelfDimerResult" type="tns:TDuplexResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AnalyzerResult" nillable="true" type="tns:AnalyzerResult" />
+      <s:element name="TDuplexResults" nillable="true" type="tns:TDuplexResults" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AnalyzeSoapIn">
+    <wsdl:part name="parameters" element="tns:Analyze" />
+  </wsdl:message>
+  <wsdl:message name="AnalyzeSoapOut">
+    <wsdl:part name="parameters" element="tns:AnalyzeResponse" />
+  </wsdl:message>
+  <wsdl:message name="HeteroDimerSoapIn">
+    <wsdl:part name="parameters" element="tns:HeteroDimer" />
+  </wsdl:message>
+  <wsdl:message name="HeteroDimerSoapOut">
+    <wsdl:part name="parameters" element="tns:HeteroDimerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelfDimerSoapIn">
+    <wsdl:part name="parameters" element="tns:SelfDimer" />
+  </wsdl:message>
+  <wsdl:message name="SelfDimerSoapOut">
+    <wsdl:part name="parameters" element="tns:SelfDimerResponse" />
+  </wsdl:message>
+  <wsdl:message name="AnalyzeHttpGetIn">
+    <wsdl:part name="Sequence" type="s:string" />
+    <wsdl:part name="TargetType" type="s:string" />
+    <wsdl:part name="OligoConc" type="s:string" />
+    <wsdl:part name="NaConc" type="s:string" />
+    <wsdl:part name="MgConc" type="s:string" />
+    <wsdl:part name="dNTPsConc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AnalyzeHttpGetOut">
+    <wsdl:part name="Body" element="tns:AnalyzerResult" />
+  </wsdl:message>
+  <wsdl:message name="HeteroDimerHttpGetIn">
+    <wsdl:part name="Sequence" type="s:string" />
+    <wsdl:part name="SecondarySequence" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeteroDimerHttpGetOut">
+    <wsdl:part name="Body" element="tns:TDuplexResults" />
+  </wsdl:message>
+  <wsdl:message name="SelfDimerHttpGetIn">
+    <wsdl:part name="Sequence" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelfDimerHttpGetOut">
+    <wsdl:part name="Body" element="tns:TDuplexResults" />
+  </wsdl:message>
+  <wsdl:message name="AnalyzeHttpPostIn">
+    <wsdl:part name="Sequence" type="s:string" />
+    <wsdl:part name="TargetType" type="s:string" />
+    <wsdl:part name="OligoConc" type="s:string" />
+    <wsdl:part name="NaConc" type="s:string" />
+    <wsdl:part name="MgConc" type="s:string" />
+    <wsdl:part name="dNTPsConc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AnalyzeHttpPostOut">
+    <wsdl:part name="Body" element="tns:AnalyzerResult" />
+  </wsdl:message>
+  <wsdl:message name="HeteroDimerHttpPostIn">
+    <wsdl:part name="Sequence" type="s:string" />
+    <wsdl:part name="SecondarySequence" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeteroDimerHttpPostOut">
+    <wsdl:part name="Body" element="tns:TDuplexResults" />
+  </wsdl:message>
+  <wsdl:message name="SelfDimerHttpPostIn">
+    <wsdl:part name="Sequence" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SelfDimerHttpPostOut">
+    <wsdl:part name="Body" element="tns:TDuplexResults" />
+  </wsdl:message>
+  <wsdl:portType name="OligoAnalyzerSoap">
+    <wsdl:operation name="Analyze">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  TargetType: DNA is the default, to switch to RNA as the target type enter in RNA or 1.  OligoConc: Units in µM.  NaConc: Units in mM.  MgConc: Units in mM.  dNTPsConc: Units in mM.</wsdl:documentation>
+      <wsdl:input message="tns:AnalyzeSoapIn" />
+      <wsdl:output message="tns:AnalyzeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HeteroDimer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  Enter Sequence and Secondary Sequence.</wsdl:documentation>
+      <wsdl:input message="tns:HeteroDimerSoapIn" />
+      <wsdl:output message="tns:HeteroDimerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelfDimer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  Enter Sequence.</wsdl:documentation>
+      <wsdl:input message="tns:SelfDimerSoapIn" />
+      <wsdl:output message="tns:SelfDimerSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="OligoAnalyzerHttpGet">
+    <wsdl:operation name="Analyze">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  TargetType: DNA is the default, to switch to RNA as the target type enter in RNA or 1.  OligoConc: Units in µM.  NaConc: Units in mM.  MgConc: Units in mM.  dNTPsConc: Units in mM.</wsdl:documentation>
+      <wsdl:input message="tns:AnalyzeHttpGetIn" />
+      <wsdl:output message="tns:AnalyzeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HeteroDimer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  Enter Sequence and Secondary Sequence.</wsdl:documentation>
+      <wsdl:input message="tns:HeteroDimerHttpGetIn" />
+      <wsdl:output message="tns:HeteroDimerHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelfDimer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  Enter Sequence.</wsdl:documentation>
+      <wsdl:input message="tns:SelfDimerHttpGetIn" />
+      <wsdl:output message="tns:SelfDimerHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="OligoAnalyzerHttpPost">
+    <wsdl:operation name="Analyze">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  TargetType: DNA is the default, to switch to RNA as the target type enter in RNA or 1.  OligoConc: Units in µM.  NaConc: Units in mM.  MgConc: Units in mM.  dNTPsConc: Units in mM.</wsdl:documentation>
+      <wsdl:input message="tns:AnalyzeHttpPostIn" />
+      <wsdl:output message="tns:AnalyzeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HeteroDimer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  Enter Sequence and Secondary Sequence.</wsdl:documentation>
+      <wsdl:input message="tns:HeteroDimerHttpPostIn" />
+      <wsdl:output message="tns:HeteroDimerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelfDimer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Input Instructions --  Enter Sequence.</wsdl:documentation>
+      <wsdl:input message="tns:SelfDimerHttpPostIn" />
+      <wsdl:output message="tns:SelfDimerHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OligoAnalyzerSoap" type="tns:OligoAnalyzerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Analyze">
+      <soap:operation soapAction="http://services.idtdna.com/Analyze" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HeteroDimer">
+      <soap:operation soapAction="http://services.idtdna.com/HeteroDimer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelfDimer">
+      <soap:operation soapAction="http://services.idtdna.com/SelfDimer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OligoAnalyzerSoap12" type="tns:OligoAnalyzerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Analyze">
+      <soap12:operation soapAction="http://services.idtdna.com/Analyze" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HeteroDimer">
+      <soap12:operation soapAction="http://services.idtdna.com/HeteroDimer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelfDimer">
+      <soap12:operation soapAction="http://services.idtdna.com/SelfDimer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OligoAnalyzerHttpGet" type="tns:OligoAnalyzerHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Analyze">
+      <http:operation location="/Analyze" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HeteroDimer">
+      <http:operation location="/HeteroDimer" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelfDimer">
+      <http:operation location="/SelfDimer" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OligoAnalyzerHttpPost" type="tns:OligoAnalyzerHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Analyze">
+      <http:operation location="/Analyze" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HeteroDimer">
+      <http:operation location="/HeteroDimer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelfDimer">
+      <http:operation location="/SelfDimer" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OligoAnalyzer">
+    <wsdl:port name="OligoAnalyzerSoap" binding="tns:OligoAnalyzerSoap">
+      <soap:address location="http://www.idtdna.com/AnalyzerService/AnalyzerService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OligoAnalyzerSoap12" binding="tns:OligoAnalyzerSoap12">
+      <soap12:address location="http://www.idtdna.com/AnalyzerService/AnalyzerService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OligoAnalyzerHttpGet" binding="tns:OligoAnalyzerHttpGet">
+      <http:address location="http://www.idtdna.com/AnalyzerService/AnalyzerService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OligoAnalyzerHttpPost" binding="tns:OligoAnalyzerHttpPost">
+      <http:address location="http://www.idtdna.com/AnalyzerService/AnalyzerService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
